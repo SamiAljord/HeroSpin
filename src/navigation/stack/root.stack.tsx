@@ -7,7 +7,11 @@ const {Navigator, Screen} = createNativeStackNavigator<TRootStackParamList>();
 
 export default function RootStack(): JSX.Element {
   return (
-    <Navigator initialRouteName="Home">
+    <Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Screen name="Home" component={HomeScreen} />
       <Screen name="Movie" component={MovieScreen} />
       <Screen name="SuperHeroes" component={SuperHeroesScreen} />
