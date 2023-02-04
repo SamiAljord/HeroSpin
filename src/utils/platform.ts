@@ -8,8 +8,8 @@ export const getWindowHeight = () => Dimensions.get('window').height;
 
 export const getWindowWidth = () => Dimensions.get('window').width;
 
-const DESIGN_SCREEN_HEIGHT = 896;
-const DESIGN_SCREEN_WIDTH = 375;
+const DESIGN_SCREEN_HEIGHT = 932;
+const DESIGN_SCREEN_WIDTH = 430;
 
 // Calculate the adaptive width given the design screen width dimension.
 // To be used for style props like: width, marginHorizontal, fontSize, ...
