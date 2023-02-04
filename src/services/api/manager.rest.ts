@@ -5,8 +5,12 @@ class ApiManager {
   private method = 'GET' as Method;
   private params = '' as string;
 
-  public addParams(params: string) {
-    this.params = params;
+  public addParams(params: {key: string; value: string}[]) {
+    params.length > 0 &&
+      params?.map(
+        ({key, value}) =>
+          (this.params += `${!this.params ? '?' : '&'}${key}=${value}`),
+      );
     return this;
   }
 
