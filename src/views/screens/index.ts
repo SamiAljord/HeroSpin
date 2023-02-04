@@ -1,4 +1,4 @@
-import HomeScreen from './Home.screen';
+import HomeScreen from './home/Home.screen';
 import MovieScreen from './Movie.screen';
 import SuperHeroesScreen from './SuperHeroes.screen';
 
