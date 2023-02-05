@@ -1,8 +1,10 @@
 import {Assets} from '@HeroSpin/assets';
 import {
+  fontSizing,
   getWindowWidth,
   hp,
   ImageStyleSheet,
+  spacing,
   TextStyleSheet,
   ViewStyleSheet,
   wp,
@@ -21,7 +23,18 @@ const viewStyles = ViewStyleSheet({
     alignItems: 'center',
   },
 });
-const textStyles = TextStyleSheet({});
+const textStyles = TextStyleSheet({
+  movieText: {
+    ...fontSizing(16, 0),
+    color: Assets.colors.text,
+    textAlign: 'center',
+    marginBottom: hp(spacing.l),
+    fontWeight: 'bold',
+    backgroundColor: Assets.colors.tertiary,
+    paddingHorizontal: wp(spacing.m),
+    paddingVertical: hp(spacing.s),
+  },
+});
 const imageStyles = ImageStyleSheet({
   emptyImage: {
     width: wp(100),
@@ -30,6 +43,8 @@ const imageStyles = ImageStyleSheet({
   movieImage: {
     width: '100%',
     height: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 });
 

@@ -22,9 +22,12 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
   const dispatch = useDispatch();
 
   const getSuperHeroes = useCallback(() => {
-    apiEndpoints.getAllSuperHeroes().then(result => {
-      dispatch(setSuperHeroesAction(result));
-    });
+    apiEndpoints
+      .getMarvelSuperHeroes()
+      .then(result => {
+        dispatch(setSuperHeroesAction(result.data.results));
+      })
+      .catch(error => console.log('error :>> ', error));
   }, [dispatch]);
 
   useLayoutEffect(() => {
@@ -33,28 +36,32 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
 
   const onGetMoviePress = () => {
     setLoading(true);
-    let heroName = '';
-    if (!superHero) {
-      heroName =
-        superheroes && superheroes.length > 0
-          ? superheroes[generateRandomNumber(0, superheroes.length - 1)].name
-          : 'batman';
-    }
-
-    apiEndpoints
-      .getMovie(heroName)
-      .then(result => {
-        if (result.Search) {
-          setMovie(
-            result.Search[generateRandomNumber(0, result.Search.length - 1)],
-          );
-        }
-        if (result.Error) {
-          setMovie(undefined);
-        }
-      })
-      .catch(() => setMovie(undefined))
-      .finally(() => setLoading(false));
+    setMovie(undefined);
+    const getMovie = () => {
+      let heroName = '';
+      if (!superHero) {
+        heroName =
+          superheroes && superheroes.length > 0
+            ? superheroes[generateRandomNumber(0, superheroes.length - 1)].name
+            : 'batman';
+      }
+      apiEndpoints
+        .getMovie(heroName)
+        .then(result => {
+          // console.log('result :>> ', result);
+          if (result.Search) {
+            setMovie(
+              result.Search[generateRandomNumber(0, result.Search.length - 1)],
+            );
+            setLoading(false);
+          }
+          if (result.Error) {
+            getMovie();
+          }
+        })
+        .catch(() => setMovie(undefined));
+    };
+    getMovie();
   };
 
   const onSelectSuperHero = () => {
