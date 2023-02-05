@@ -12,6 +12,14 @@ import {
 import {StyleSheet} from 'react-native';
 
 const viewStyles = ViewStyleSheet({
+  background: {
+    backgroundColor: Assets.colors.background,
+  },
+  container: {
+    gap: hp(spacing.m),
+    paddingBottom: hp(spacing.m),
+    paddingHorizontal: hp(spacing.m),
+  },
   button: {
     width: '100%',
     backgroundColor: Assets.colors.secondary,
@@ -20,6 +28,29 @@ const viewStyles = ViewStyleSheet({
     marginTop: hp(spacing.xl),
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  heroCard: {
+    backgroundColor: Assets.colors.tertiary,
+    borderRadius: 5,
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: Assets.colors.secondary,
+    flexGrow: 1 / 3,
+    flexShrink: 1,
+    flex: 1,
+    marginHorizontal: wp(spacing.xs),
+    minHeight: hp(200),
+  },
+  header: {
+    width: '100%',
+    backgroundColor: Assets.colors.dark,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: wp(spacing.m),
+    paddingVertical: hp(spacing.l),
+  },
+  safeArea: {
+    backgroundColor: Assets.colors.dark,
   },
 });
 const textStyles = TextStyleSheet({
@@ -30,13 +61,10 @@ const textStyles = TextStyleSheet({
   },
   text: {
     color: Assets.colors.text,
-    ...fontSizing(16, 0),
-    marginTop: hp(spacing.l),
-  },
-  resetText: {
-    color: Assets.colors.secondary,
-    ...fontSizing(16, 0),
-    marginTop: hp(spacing.xl),
+    ...fontSizing(14, 0),
+    marginTop: hp(spacing.s),
+    textAlign: 'center',
+    fontWeight: '600',
   },
   highlightedText: {
     color: Assets.colors.secondary,
@@ -44,13 +72,9 @@ const textStyles = TextStyleSheet({
   },
 });
 const imageStyles = ImageStyleSheet({
-  background: {
-    backgroundColor: Assets.colors.background,
-    height: getWindowHeight() / 2,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: wp(spacing.m),
+  heroImage: {
+    width: '100%',
+    height: hp(125),
   },
 });
 

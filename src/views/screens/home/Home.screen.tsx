@@ -18,6 +18,7 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
   const [superHero, setSuperHero] = useState<string>();
   const [movie, setMovie] = useState<TMovieData>();
   const [loading, setLoading] = useState<boolean>();
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   const dispatch = useDispatch();
 
@@ -34,9 +35,11 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
     getSuperHeroes();
   }, [getSuperHeroes]);
 
+  const onResetSuperHero = () => setSuperHero('');
   const onGetMoviePress = () => {
     setLoading(true);
     setMovie(undefined);
+    setErrorMessage('');
     const getMovie = () => {
       let heroName = '';
       if (!superHero) {
@@ -46,17 +49,20 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
             : 'batman';
       }
       apiEndpoints
-        .getMovie(heroName)
+        .getMovie(superHero || heroName)
         .then(result => {
-          // console.log('result :>> ', result);
           if (result.Search) {
             setMovie(
               result.Search[generateRandomNumber(0, result.Search.length - 1)],
             );
             setLoading(false);
           }
-          if (result.Error) {
+          if (result.Error && !superHero) {
             getMovie();
+          }
+          if (result.Error && superHero) {
+            setLoading(false);
+            setErrorMessage(result.Error);
           }
         })
         .catch(() => setMovie(undefined));
@@ -78,16 +84,24 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
       blurRadius={5}
       style={styles.background}
       resizeMode="repeat">
-      <RandomMovieCardComponent loading={loading} value={movie} />
+      <RandomMovieCardComponent
+        loading={loading}
+        value={movie}
+        errorMessage={errorMessage}
+      />
       <TouchableOpacity onPress={onGetMoviePress} style={styles.button}>
         <Text style={styles.buttonText}>Surprise Me!</Text>
       </TouchableOpacity>
-      {!superHero ? (
-        <Text style={styles.text}>
-          Wanna be more specific?{' '}
-          <Text onPress={onSelectSuperHero} style={styles.highlightedText}>
-            Select your SuperHero!
-          </Text>
+
+      <Text style={styles.text}>
+        {!superHero ? 'Wanna be more specific?' : `SuperHero: ${superHero},`}{' '}
+        <Text onPress={onSelectSuperHero} style={styles.highlightedText}>
+          {!superHero ? 'Select your SuperHero!' : 'Select another SuperHero!'}
+        </Text>
+      </Text>
+      {superHero ? (
+        <Text onPress={onResetSuperHero} style={styles.resetText}>
+          Reset Hero
         </Text>
       ) : null}
     </ImageBackground>

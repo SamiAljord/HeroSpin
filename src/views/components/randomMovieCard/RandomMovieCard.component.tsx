@@ -16,6 +16,7 @@ type TRandomMovieCardProps = {
   loading?: boolean;
   value?: TMovieData;
   style?: ViewStyle;
+  errorMessage?: string;
 };
 const RandomMovieCardComponent = (props: TRandomMovieCardProps) => {
   const spinValue = new Animated.Value(0);
@@ -45,6 +46,9 @@ const RandomMovieCardComponent = (props: TRandomMovieCardProps) => {
           <Image source={Assets.images.movieReel} style={styles.emptyImage} />
         </Animated.View>
       )}
+      {props.errorMessage ? (
+        <Text style={styles.movieText}>{props.errorMessage}</Text>
+      ) : null}
       {props.value && !props.loading && (
         <ImageBackground
           source={
