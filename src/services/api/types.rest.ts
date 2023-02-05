@@ -1,5 +1,7 @@
 export type TGetMovieResponse = {
-  Search: TMovieData[];
+  Search?: TMovieData[];
+  Response?: string;
+  Error?: string;
 };
 export type TMovieData = {
   Title: string;
