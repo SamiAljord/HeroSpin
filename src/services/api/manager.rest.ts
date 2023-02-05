@@ -41,8 +41,9 @@ class ApiManager {
 
   public send(): unknown {
     return new Promise((resolve, reject) => {
+      const url = `${this.route}${this.params}`;
       axios({
-        url: `${this.route}${this.params}`,
+        url,
         method: this.method,
       })
         .then((response: AxiosResponse) => {

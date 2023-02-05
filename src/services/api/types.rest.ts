@@ -1,3 +1,57 @@
+export type TGetMarvelHeroesResponse = {
+  attributionHTML: string;
+  attributionText: string;
+  code: 200;
+  copyright: string;
+  data: {
+    offset: number;
+    limit: number;
+    total: 1562;
+    count: number;
+    results: TMarvelSuperHero[];
+  };
+  etag: string;
+  status: 'Ok';
+};
+export type TMarvelSuperHero = {
+  comics: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: [];
+  };
+  description: string;
+  events: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: [];
+  };
+  id: number;
+  modified: string;
+  name: string;
+  resourceURI: string;
+  series: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: [];
+  };
+  stories: {
+    available: number;
+    returned: number;
+    collectionURI: string;
+    items: [];
+  };
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+  urls: {
+    type: string;
+    url: string;
+  }[];
+};
 export type TGetMovieResponse = {
   Search?: TMovieData[];
   Response?: string;
@@ -14,6 +68,10 @@ export enum ESearchMovieParams {
   search = 's',
   type = 'type',
   apikey = 'apikey',
+  hash = 'hash',
+  timestamp = 'ts',
+  limit = 'limit',
+  orderBy = 'orderBy',
 }
 export type THeroData = {
   id: number;

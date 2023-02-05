@@ -1,9 +1,9 @@
-import {THeroData} from '@HeroSpin/services';
+import {TMarvelSuperHero} from '@HeroSpin/services';
 import {SET_HEROES} from './actions';
 import {TSuperHeroesActionTypes} from './types';
 
 type TSuperheroesReducer = {
-  superheroes: THeroData[];
+  superheroes: TMarvelSuperHero[];
 };
 const initialState: TSuperheroesReducer = {
   superheroes: [],

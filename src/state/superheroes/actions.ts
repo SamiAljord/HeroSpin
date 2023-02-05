@@ -1,10 +1,10 @@
-import {THeroData} from '@HeroSpin/services';
+import {TMarvelSuperHero} from '@HeroSpin/services';
 import {TSuperHeroesActionTypes} from './types';
 
 export const SET_HEROES = 'SET_HEROES';
 
 export const setSuperHeroesAction = (
-  heroes: THeroData[],
+  heroes: TMarvelSuperHero[],
 ): TSuperHeroesActionTypes => ({
   type: SET_HEROES,
   payload: {
