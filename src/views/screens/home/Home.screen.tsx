@@ -23,12 +23,9 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
   const dispatch = useDispatch();
 
   const getSuperHeroes = useCallback(() => {
-    apiEndpoints
-      .getMarvelSuperHeroes()
-      .then(result => {
-        dispatch(setSuperHeroesAction(result.data.results));
-      })
-      .catch(error => console.log('error :>> ', error));
+    apiEndpoints.getMarvelSuperHeroes().then(result => {
+      dispatch(setSuperHeroesAction(result.data.results));
+    });
   }, [dispatch]);
 
   useLayoutEffect(() => {
@@ -77,6 +74,12 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
       selectSuperHero: handleSelectedHero,
     });
   };
+  const handleViewMovie = () => {
+    movie &&
+      navigation.navigate('Movie', {
+        imdbId: movie.imdbID,
+      });
+  };
 
   return (
     <ImageBackground
@@ -88,6 +91,7 @@ const HomeScreen = ({navigation}: THomeScreenProps) => {
         loading={loading}
         value={movie}
         errorMessage={errorMessage}
+        handleViewMovie={handleViewMovie}
       />
       <TouchableOpacity onPress={onGetMoviePress} style={styles.button}>
         <Text style={styles.buttonText}>Surprise Me!</Text>
