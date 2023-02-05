@@ -1,7 +1,7 @@
-import {THeroData, TMovieData} from '@HeroSpin/services';
+import {TMovieData} from '@HeroSpin/services';
 
 export type TRootStackParamList = {
   Home: undefined;
   Movie: {movie: TMovieData};
-  SuperHeroes: {selectSuperHero: (superhero: Pick<THeroData, 'name'>) => void};
+  SuperHeroes: {selectSuperHero: (superhero: string) => void};
 };

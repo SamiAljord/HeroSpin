@@ -1,14 +1,43 @@
 import {Assets} from '@HeroSpin/assets';
 import {
+  fontSizing,
   getWindowHeight,
+  hp,
   ImageStyleSheet,
+  spacing,
   TextStyleSheet,
   ViewStyleSheet,
+  wp,
 } from '@HeroSpin/utils';
 import {StyleSheet} from 'react-native';
 
-const viewStyles = ViewStyleSheet({});
-const textStyles = TextStyleSheet({});
+const viewStyles = ViewStyleSheet({
+  button: {
+    width: '100%',
+    backgroundColor: Assets.colors.secondary,
+    borderRadius: 5,
+    height: hp(56),
+    marginTop: hp(spacing.xl),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+const textStyles = TextStyleSheet({
+  buttonText: {
+    color: Assets.colors.text,
+    ...fontSizing(16, 0),
+    fontWeight: '600',
+  },
+  text: {
+    color: Assets.colors.text,
+    ...fontSizing(16, 0),
+    marginTop: hp(spacing.l),
+  },
+  highlightedText: {
+    color: Assets.colors.secondary,
+    fontWeight: 'bold',
+  },
+});
 const imageStyles = ImageStyleSheet({
   background: {
     backgroundColor: Assets.colors.background,
@@ -16,6 +45,7 @@ const imageStyles = ImageStyleSheet({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: wp(spacing.m),
   },
 });
 
