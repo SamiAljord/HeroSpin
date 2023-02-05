@@ -12,6 +12,7 @@ import {
   TGetMarvelHeroesResponse,
   TGetMovieResponse,
   THeroData,
+  TMovieDetails,
 } from './types.rest';
 
 export const apiEndpoints = {
@@ -74,5 +75,22 @@ export const apiEndpoints = {
       ])
       .get()
       .send() as Promise<TGetMovieResponse>;
+  },
+  getMovieDetailsById: (id: string): Promise<TMovieDetails> => {
+    const api = new ApiManager();
+    return api
+      .addRoute(apiRoutes.getMovie)
+      .addParams([
+        {
+          key: ESearchMovieParams.imdbId,
+          value: id,
+        },
+        {
+          key: ESearchMovieParams.apikey,
+          value: OMDB_API_KEY,
+        },
+      ])
+      .get()
+      .send() as Promise<TMovieDetails>;
   },
 };
