@@ -1,0 +1,29 @@
+import {THeroData} from '@HeroSpin/services';
+import {SET_HEROES} from './actions';
+import {TSuperHeroesActionTypes} from './types';
+
+type TSuperheroesReducer = {
+  superheroes: THeroData[];
+};
+const initialState: TSuperheroesReducer = {
+  superheroes: [],
+};
+
+const superheroesReducer = (
+  state = initialState,
+  action: TSuperHeroesActionTypes,
+) => {
+  switch (action.type) {
+    case SET_HEROES: {
+      const {superheroes} = action.payload;
+      return {
+        ...state,
+        superheroes,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export default superheroesReducer;
