@@ -22,6 +22,10 @@ const viewStyles = ViewStyleSheet({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  wrapper: {
+    width: '100%',
+    height: '100%',
+  },
 });
 const textStyles = TextStyleSheet({
   movieText: {

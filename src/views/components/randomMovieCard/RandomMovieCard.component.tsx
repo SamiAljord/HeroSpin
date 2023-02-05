@@ -5,6 +5,7 @@ import {
   Text,
   Animated,
   Easing,
+  Pressable,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {TMovieData} from '@HeroSpin/services';
@@ -17,6 +18,7 @@ type TRandomMovieCardProps = {
   value?: TMovieData;
   style?: ViewStyle;
   errorMessage?: string;
+  handleViewMovie?: () => void;
 };
 const RandomMovieCardComponent = (props: TRandomMovieCardProps) => {
   const spinValue = new Animated.Value(0);
@@ -39,6 +41,7 @@ const RandomMovieCardComponent = (props: TRandomMovieCardProps) => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
+
   return (
     <View style={[styles.container, props.style]}>
       {(!props.value || props.loading) && (
@@ -50,19 +53,21 @@ const RandomMovieCardComponent = (props: TRandomMovieCardProps) => {
         <Text style={styles.movieText}>{props.errorMessage}</Text>
       ) : null}
       {props.value && !props.loading && (
-        <ImageBackground
-          source={
-            props.value.Poster === 'N/A'
-              ? Assets.images.noImage
-              : {
-                  uri: props.value.Poster,
-                }
-          }
-          style={styles.movieImage}>
-          <Text style={styles.movieText}>
-            {props.value.Title} - {props.value.Year}
-          </Text>
-        </ImageBackground>
+        <Pressable style={styles.wrapper} onPress={props.handleViewMovie}>
+          <ImageBackground
+            source={
+              props.value.Poster === 'N/A'
+                ? Assets.images.noImage
+                : {
+                    uri: props.value.Poster,
+                  }
+            }
+            style={styles.movieImage}>
+            <Text style={styles.movieText}>
+              {props.value.Title} - {props.value.Year}
+            </Text>
+          </ImageBackground>
+        </Pressable>
       )}
     </View>
   );
